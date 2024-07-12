@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from api.routes import books, libraries, users
+from api.routes import libraries, users
 from api.settings import get_settings
 
 settings = get_settings()
@@ -18,6 +18,5 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(books.router, prefix="/books", tags=["books"])
 app.include_router(users.router, prefix="/users", tags=["users"])
 app.include_router(libraries.router, prefix="/libraries", tags=["libraries"])

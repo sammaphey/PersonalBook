@@ -7,13 +7,11 @@ from pydantic import SecretStr
 from pymongo.database import Database
 from pymongo import MongoClient
 
-from api.services.book import BookService
 from api.services.library import LibraryService
 from api.services.user import UserService
 
 from api.settings import get_settings
 from api.constants import Collection
-from api.contract.book import Book
 from api.contract.library import Library
 from api.contract.user import User
 
@@ -53,15 +51,6 @@ class ServiceFactory:
         )[settings.mongo_db_name]
 
         return self
-
-    @cache
-    def create_book_service(self):
-        """
-        Create a service for interacting with book data.
-
-        :returns: A ``BookService``.
-        """
-        return BookService(_DB=self._DB, _collection=Collection.Book, _OutputDocumentType=Book)
 
     @cache
     def create_library_service(self):
